@@ -4871,6 +4871,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2D Lights - Sewers - Part1
       objectReference: {fileID: 0}
+    - target: {fileID: 1205466678480701211, guid: db228d359ae31be4fa247bdef786a46e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1205466678489413125, guid: db228d359ae31be4fa247bdef786a46e,
         type: 3}
       propertyPath: m_Vertices.Array.size
@@ -9566,9 +9571,75 @@ PrefabInstance:
     - {fileID: 1205466677940429792, guid: db228d359ae31be4fa247bdef786a46e, type: 3}
     - {fileID: 1205466679787436960, guid: db228d359ae31be4fa247bdef786a46e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: db228d359ae31be4fa247bdef786a46e, type: 3}
+--- !u!1 &4442642933504004112 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1205466679787436967, guid: db228d359ae31be4fa247bdef786a46e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3250998302571457463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &862350314609921094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442642933504004112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bd6ccdf9ff9e441a4ff36a9e200e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountIntensity: 2
+  amountRange: 0.6
+  amountPos: 0.3
+  speed: 0.3
+--- !u!1 &4442642933734099024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1205466677940429799, guid: db228d359ae31be4fa247bdef786a46e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3250998302571457463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &222958993475949097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442642933734099024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bd6ccdf9ff9e441a4ff36a9e200e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountIntensity: 2
+  amountRange: 0.6
+  amountPos: 0.3
+  speed: 0.2
 --- !u!4 &4442642934273338541 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1205466678480701210, guid: db228d359ae31be4fa247bdef786a46e,
     type: 3}
   m_PrefabInstance: {fileID: 3250998302571457463}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4442642934519463779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1205466678788691156, guid: db228d359ae31be4fa247bdef786a46e,
+    type: 3}
+  m_PrefabInstance: {fileID: 3250998302571457463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4571746715962917414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4442642934519463779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78bd6ccdf9ff9e441a4ff36a9e200e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountIntensity: 3
+  amountRange: 0.6
+  amountPos: 0.3
+  speed: 0.4
