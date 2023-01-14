@@ -45,7 +45,6 @@ public class SimpleCameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
         ZoomCamera();
     }
 
@@ -53,7 +52,6 @@ public class SimpleCameraMovement : MonoBehaviour
     {
         MoveWithMouse();
     }
-
 
 
     private void MoveWithMouse()
