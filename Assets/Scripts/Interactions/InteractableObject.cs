@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class InteractableObject : MonoBehaviour
 {
-    public Color OutlineColor { get; set; }
-    [SerializeField]
     public Color outlineColor;
 
     public virtual void OnMouseDown()

@@ -7,5 +7,5 @@ using UnityEngine;
 public enum DialogueType
 {
     Text,
-    Option
+    Question
 }

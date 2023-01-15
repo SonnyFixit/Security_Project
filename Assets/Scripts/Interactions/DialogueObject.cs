@@ -5,6 +5,6 @@ public class DialogueObject : InteractableObject
 {
     public override void OnMouseDown()
     {
-        Debug.Log("Kliknięto na interakcje: " + name);
+        GetComponent<DialogueTrigger>().TriggerDialogue();
     }
 }
