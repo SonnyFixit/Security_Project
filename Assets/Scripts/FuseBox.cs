@@ -5,48 +5,47 @@ using UnityEngine;
 public class FuseBox : MonoBehaviour
 {
 
-    public GameObject wall;
+
     public GameObject electricityEffect;
-    public GameObject electricExplosion;
-    public GameObject icon;
+
+    [SerializeField]
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip switchClip;
+
+    private int hitsToDestroy = 0;
+
+    public static bool fuseBoxDestroyed = false;
 
 
-
-    void OnTriggerStay2D(Collider2D col)
+    public virtual void OnMouseDown()
     {
 
-
-    if (col.gameObject.tag == "Player")
-    {
-
-
-        icon.SetActive(true);
-
-
-
-
-        if (Input.GetKeyDown(KeyCode.F))
+        if (hitsToDestroy <=3)
         {
- 
-        Instantiate(electricExplosion, transform.position, transform.rotation);
-        Destroy(wall, 3f);
-        Destroy(electricityEffect, 3f);
+            audioSource.Play();
         }
+
+        if (hitsToDestroy == 4)
+        {
+            audioSource.clip = switchClip;
+            audioSource.Play();
+            fuseBoxDestroyed = true;
+            Destroy(electricityEffect);
+        }
+
+        hitsToDestroy++;
+
+
+
+      
+    }
+
     
         
-    }
-    }
+    
+  
 
-
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-
-
-        icon.SetActive(false);
-        }
-    }
 
 }

@@ -1,33 +1,33 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorPanels : MonoBehaviour
+public class DoorPanels2 : MonoBehaviour
 {
     [SerializeField]
     private GameObject doorLight;
 
     [SerializeField]
     private AudioSource audioSource;
-   
-    public static bool firstButton = false;
+
+    public static bool secondButton = false;
 
 
 
     public virtual void OnMouseDown()
     {
 
-        if (firstButton == false)
+        if (secondButton == false)
         {
             audioSource.Play();
         }
 
 
         doorLight.SetActive(true);
-        firstButton = true;
+        secondButton = true;
 
     }
 
-   
+
 
 }
