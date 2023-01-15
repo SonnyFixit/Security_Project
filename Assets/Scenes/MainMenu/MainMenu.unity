@@ -1567,7 +1567,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: beb1c9e6d75af164d99714fe95a3ccc6,
+      objectReference: {fileID: 21300000, guid: a11209e07ec31b5479dd6c7e53f77d7c,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c252fff0d959815438a795ddbd7d1a13, type: 3}
@@ -4521,5 +4521,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: ControlsMenu
       objectReference: {fileID: 0}
+    - target: {fileID: 6448339549284271749, guid: c252fff0d959815438a795ddbd7d1a13,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448339549284271749, guid: c252fff0d959815438a795ddbd7d1a13,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2767b51fb87180d4283bcd9568041036,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c252fff0d959815438a795ddbd7d1a13, type: 3}

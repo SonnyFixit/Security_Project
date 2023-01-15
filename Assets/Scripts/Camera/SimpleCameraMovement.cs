@@ -58,14 +58,14 @@ public class SimpleCameraMovement : MonoBehaviour
     {
 
 
-        if (Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(1))
         {
             dragOrigin = camera.ScreenToWorldPoint(Input.mousePosition);
            
 
         }
 
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(1))
         {
 
             Vector3 difference = dragOrigin - camera.ScreenToWorldPoint(Input.mousePosition);
