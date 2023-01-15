@@ -4,44 +4,30 @@ using UnityEngine;
 
 public class DoorPanels : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject doorLight;
 
-    public GameObject doorLight;
-    public GameObject icon;
+    [SerializeField]
+    private AudioSource audioSource;
+   
     public static bool firstButton = false;
 
-    void OnTriggerStay2D(Collider2D col)
+
+
+    public virtual void OnMouseDown()
     {
 
-
-        if (col.gameObject.tag == "Player")
+        if (firstButton == false)
         {
-
-
-            icon.SetActive(true);
-
-
-
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-
-                doorLight.SetActive(true);
-                firstButton = true;
-
-            }
-
-
+            audioSource.Play();
         }
+
+
+        doorLight.SetActive(true);
+        firstButton = true;
+
     }
 
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Player")
-        {
-
-
-            icon.SetActive(false);
-        }
-    }
+   
 
 }
