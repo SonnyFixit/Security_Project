@@ -8,32 +8,34 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    [Header("Dialogue data")]
+    [Header("Text dialogue settings")]
     public TMP_Text speakerNameText;
     public TMP_Text dialogueText;
     public TMP_Text dialogueButtonText;
-    public GameObject dialogueBox;
+    public GameObject dialoguePanel;
 
     private string continueText = "CONTINUE »";
     private string quitText = "EXIT";
 
     private Queue<string> sentences;
-    private Animator dialogueBoxAnimator;
+    private Animator dialogueAnimator;
 
-    [Header("Choose option data")]
+    [Header("Question panel settings")]
     public TMP_Text questionText;
-    public GameObject optionButtonPrefab;
-    public GameObject optionDialogueBox;
+    public GameObject answerButtonPrefab;
+    public GameObject questionPanel;
 
-    private GameObject[] optionsButtons;
-    private Transform optionsContainer;
-    private Animator optionDialogueBoxAnimator;
+    private GameObject[] answerButtons;
+    public Transform answersContainer;
+    private Animator questionAnimator;
+
+    private string answerwContainerName = "AnswersContainerl";
 
     private enum DialogType
     {
         None,
         Text,
-        Option
+        Question
     }
     private DialogType dialogType = DialogType.None;
 
@@ -41,16 +43,16 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
-        dialogueBoxAnimator = dialogueBox.GetComponent<Animator>();
-        optionDialogueBoxAnimator = optionDialogueBox.GetComponent<Animator>();
+        dialogueAnimator = dialoguePanel.GetComponent<Animator>();
+        questionAnimator = questionPanel.GetComponent<Animator>();
 
-        optionsButtons = Array.Empty<GameObject>();
-        optionsContainer = optionDialogueBox.transform.Find("Options");
+        answerButtons = Array.Empty<GameObject>();
+        //answersContainer = questionPanel.transform.Find(answerwContainerName);
     }
 
     private void Update()
     {
-        if (!dialogueBox.active && !optionDialogueBox.active)
+        if (!dialoguePanel.activeSelf && !questionPanel.activeSelf)
         {
             return;
         }
@@ -61,11 +63,11 @@ public class DialogueManager : MonoBehaviour
                 break;
 
             case DialogType.Text:
-                TextDialogueKeyboardControls();
+                DialogueKeyboardControls();
                 break;
 
-            case DialogType.Option:
-                OptionDialogueKeyboardControls();
+            case DialogType.Question:
+                QuestionKeyboardControls();
                 break;
 
             default:
@@ -73,46 +75,27 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void TextDialogueKeyboardControls()
+    private void DialogueKeyboardControls()
     {
         if (!Input.GetKeyDown(KeyCode.Space))
         {
             return;
         }
 
-        EventSystem.current.SetSelectedGameObject(dialogueBox);
+        EventSystem.current.SetSelectedGameObject(dialoguePanel);
         DisplayNextSentence();
     }
-
-    private void InvokeOptionButton(KeyCode keyCode)
+    private void QuestionKeyboardControls()
     {
-        if (!Input.GetKeyDown(keyCode))
-        {
-            return;
-        }
-
-        int buttonIndex = keyCode - KeyCode.Alpha1;
-        if (optionsButtons.Length <= buttonIndex)
-        {
-            return;
-        }
-
-        optionsButtons[buttonIndex].GetComponent<Button>().onClick.Invoke();
-        return;
+        InvokeAnswerButton(KeyCode.Alpha1);
+        InvokeAnswerButton(KeyCode.Alpha2);
+        InvokeAnswerButton(KeyCode.Alpha3);
+        InvokeAnswerButton(KeyCode.Alpha4);
     }
-
-    private void OptionDialogueKeyboardControls()
-    {
-        InvokeOptionButton(KeyCode.Alpha1);
-        InvokeOptionButton(KeyCode.Alpha2);
-        InvokeOptionButton(KeyCode.Alpha3);
-        InvokeOptionButton(KeyCode.Alpha4);
-    }
-
     public void StartDialogue(Dialogue dialogue)
     {
-        dialogueBox.SetActive(true);
-        dialogueBoxAnimator.SetBool("IsOpen", true);
+        dialoguePanel.SetActive(true);
+        dialogueAnimator.SetBool("IsOpen", true);
 
         dialogType = DialogType.Text;
         speakerNameText.text = dialogue.speakerName;
@@ -137,6 +120,71 @@ public class DialogueManager : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(TypeSentence(sentence));
     }
+    private void EndDialogue()
+    {
+        dialogueAnimator.SetBool("IsOpen", false);
+        //dialoguePanel.SetActive(false);
+    }
+
+    public void StartQuestion(Question dialogue)
+    {
+        questionPanel.SetActive(true);
+        questionAnimator.SetBool("IsOpen", true);
+
+        questionText.text = dialogue.question;
+        dialogType = DialogType.Question;
+
+        if (dialogue.answers.Length > 4)
+        {
+            Debug.LogWarning("Many dialogue options. Consider reduce number of available options!");
+        }
+
+        foreach (var oldButton in answerButtons)
+        {
+            DestroyImmediate(oldButton);
+        }
+
+        answerButtons = new GameObject[dialogue.answers.Length];
+        for (int i = 0; i < dialogue.answers.Length; i++)
+        {
+            string currentAnswer = dialogue.answers[i];
+            answerButtons[i] = Instantiate(answerButtonPrefab, answersContainer, false);
+            answerButtons[i].GetComponentInChildren<TMP_Text>().text = $"{i + 1}. " + currentAnswer;
+            answerButtons[i].GetComponentInChildren<Button>().onClick.AddListener(() =>
+                {
+                    dialogue.pickedAnswer = currentAnswer;
+                    Debug.Log("You clicked: " + currentAnswer);
+                    EndQuestion();
+                });
+        }
+    }
+
+    private void InvokeAnswerButton(KeyCode keyCode)
+    {
+        if (!Input.GetKeyDown(keyCode))
+        {
+            return;
+        }
+
+        int buttonIndex = keyCode - KeyCode.Alpha1;
+        if (answerButtons.Length <= buttonIndex)
+        {
+            return;
+        }
+
+        answerButtons[buttonIndex].GetComponent<Button>().onClick.Invoke();
+        return;
+    }
+
+    private void EndQuestion()
+    {
+        questionAnimator.SetBool("IsOpen", false);
+        foreach (var oldButton in answerButtons)
+        {
+            DestroyImmediate(oldButton);
+        }
+        //questionPanel.SetActive(false);
+    }
 
     private IEnumerator TypeSentence(string sentence)
     {
@@ -146,48 +194,5 @@ public class DialogueManager : MonoBehaviour
             dialogueText.text += letter;
             yield return null;
         }
-    }
-
-    private void EndDialogue()
-    {
-        dialogueBoxAnimator.SetBool("IsOpen", false);
-        dialogueBox.SetActive(false);
-    }
-
-    public void StartOptionsDialogue(OptionDialogue dialogue)
-    {
-        optionDialogueBox.SetActive(true);
-        questionText.text = dialogue.question;
-        dialogType = DialogType.Option;
-
-        if (dialogue.options.Length > 4)
-        {
-            Debug.LogWarning("Many dialogue options. Consider reduce number of available options!");
-        }
-
-        foreach (var oldButton in optionsButtons)
-        {
-            DestroyImmediate(oldButton);
-        }
-
-        optionsButtons = new GameObject[dialogue.options.Length];
-        for (int i = 0; i < dialogue.options.Length; i++)
-        {
-            string currentOption = dialogue.options[i];
-            optionsButtons[i] = Instantiate(optionButtonPrefab, optionsContainer, false);
-            optionsButtons[i].GetComponentInChildren<TMP_Text>().text = $"{i + 1}. " + currentOption;
-            optionsButtons[i].GetComponentInChildren<Button>().onClick.AddListener(() =>
-                {
-                    dialogue.chosenOption = currentOption;
-                    Debug.Log("You clicked: " + currentOption);
-                    EndOptionDialogue();
-                });
-        }
-    }
-
-    private void EndOptionDialogue()
-    {
-        //dialogueBoxAnimator.SetBool("IsOpen", false);
-        optionDialogueBox.SetActive(false);
     }
 }
