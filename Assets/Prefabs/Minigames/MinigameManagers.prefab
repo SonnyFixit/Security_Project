@@ -81,7 +81,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ff1481184f11843942b2aae8951ab5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minigameCanvas: {fileID: 0}
+  minigameCanvas: {fileID: 1532558412753687417, guid: 06079a4ebce155d41894d67bdf5340a9,
+    type: 3}
   mainText: {fileID: 0}
   goodColor: {r: 0.720043, g: 0.9339623, b: 0.6740388, a: 1}
   wrongColor: {r: 0.9245283, g: 0.5960254, b: 0.56256676, a: 1}

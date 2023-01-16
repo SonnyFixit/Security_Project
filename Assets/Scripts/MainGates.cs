@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class MainGates : MonoBehaviour
 {
-
+    public bool firstLightUnlock;
+    public bool secondLightUnlock;
 
     public virtual void OnMouseDown()
     {
-        if (MainGatesButtonOne.firstGateUnlock == true)
+        if (firstLightUnlock && secondLightUnlock)
         {
+            Debug.Log("KONIEC");
             Application.Quit();
         }
     }
-   
-       
-    
 }

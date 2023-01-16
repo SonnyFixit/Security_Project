@@ -5,14 +5,12 @@ using UnityEngine;
 public class MainGatesButtonOne : MonoBehaviour
 {
     public GameObject doorLight;
-    public static bool firstGateUnlock = false;
+    public static bool firstGateUnlock;
 
     public virtual void OnMouseDown()
     {
-
-
         doorLight.SetActive(true);
         firstGateUnlock = true;
-
+        FindObjectOfType<MainGates>().firstLightUnlock = true;
     }
 }

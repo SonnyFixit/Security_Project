@@ -26,9 +26,13 @@ public class MinigameHackManager : MonoBehaviour
     public Transform targetLayout;
     public GameObject targetButtonPrefab;
     private int targetIterator = 0;
+    private GameObject[] targetHacks = System.Array.Empty<GameObject>();
+
 
     [Header("PlayerTarget")]
     public Transform playerTargetLayout;
+    private GameObject[] playerHacks = new GameObject[6];
+
 
     [Header("Buttons")]
     public Transform buttonsLayout;
@@ -138,7 +142,6 @@ public class MinigameHackManager : MonoBehaviour
 
         isPlaying = true;
         mainText.text = "W³am sie do systemu";
-
         minigameCanvas.gameObject.SetActive(true);
 
         fullTime = data.timeLeft;
@@ -152,16 +155,21 @@ public class MinigameHackManager : MonoBehaviour
 
         int targetLength = data.targets.Length > 6 ? 6 : data.targets.Length;
         Vector2[] targetPath = CreateTargetPath(targetLength);
+        targetHacks = new GameObject[targetLength];
 
         for (int i = 0; i < targetLength; i++)
         {
             GameObject targetButtonCopy = Instantiate(targetButtonPrefab, targetLayout, false);
+            targetHacks[i] = targetButtonCopy;
             targetButtonCopy.GetComponentInChildren<TMP_Text>().text = data.targets[i];
         }
 
+        hackClicked = new bool[5, 6];
+        playerHacks = new GameObject[6];
         hackButtons = new GameObject[(int)buttonsGrid.x, (int)buttonsGrid.y];
         hackClicked = new bool[(int)buttonsGrid.x, (int)buttonsGrid.y];
         currentClick = 0;
+        targetIterator = 0;
 
         for (int i = 0; i < buttonsGrid.x; i++)
         {
@@ -196,6 +204,8 @@ public class MinigameHackManager : MonoBehaviour
                         startTimer = true;
 
                         string textTime = $"{leftTime:00.00} s";
+
+                        leftTime = fullTime;
                         leftTimeText.text = textTime;
                         timeSlider.value = data.timeLeft;
 
@@ -250,18 +260,20 @@ public class MinigameHackManager : MonoBehaviour
                     thisButton.GetComponent<Image>().color = pickedColor;
 
                     GameObject playerTargetCopy = Instantiate(targetButtonPrefab, playerTargetLayout, false);
+                    playerHacks[currentClick] = playerTargetCopy;
+
                     string pickedHack = thisButton.GetComponentInChildren<TMP_Text>().text;
                     playerTargetCopy.GetComponentInChildren<TMP_Text>().text = pickedHack;
 
-                    if (targetIterator < targetLength && pickedHack == data.targets[targetIterator])
+                    if (pickedHack == data.targets[targetIterator])
                     {
                         targetIterator++;
                         playerTargetCopy.GetComponent<Image>().color = goodColor;
                     }
                     else
                     {
-                        targetIterator = 0;
                         playerTargetCopy.GetComponent<Image>().color = wrongColor;
+                        targetIterator = 0;
                     }
                     currentClick++;
 
@@ -295,6 +307,13 @@ public class MinigameHackManager : MonoBehaviour
         Debug.Log("Result: " + win);
         PlayerWin = win;
         isPlaying = false;
+        MainGatesButtonTwo.firstGateUnlock = win;
+        if (win)
+        {
+            MainGatesButtonTwo.doorLight.SetActive(true);
+            FindObjectOfType<MainGates>().secondLightUnlock = true;
+        }
+
 
         if (win)
         {
@@ -306,8 +325,8 @@ public class MinigameHackManager : MonoBehaviour
         {
             mainText.text = "Nie uda³o siê";
             StartCoroutine(LateCall(3, false));
-
         }
+
     }
 
     IEnumerator LateCall(float seconds, bool active)
@@ -315,7 +334,24 @@ public class MinigameHackManager : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         minigameCanvas.gameObject.SetActive(active);
-        //Do Function here...
+
+        foreach (var oldButton in targetHacks)
+        {
+            DestroyImmediate(oldButton);
+        }
+
+        foreach (var oldButton in playerHacks)
+        {
+            DestroyImmediate(oldButton);
+        }
+
+        for (int i = 0; i < buttonsGrid.x; i++)
+        {
+            for (int j = 0; j < buttonsGrid.y; j++)
+            {
+                DestroyImmediate(hackButtons[i, j]);
+            }
+        }
     }
 
     private void Update()
@@ -326,15 +362,18 @@ public class MinigameHackManager : MonoBehaviour
         if (!startTimer)
             return;
 
-        float time = fullTime - Time.time;
-        if (time <= 0)
+        if (leftTime > 0)
+        {
+            leftTime -= Time.deltaTime;
+        }
+        else
         {
             EndGame(false);
         }
 
-        string textTime = $"{time:00.00} s";
+        string textTime = $"{leftTime:00.00} s";
         leftTimeText.text = textTime;
 
-        timeSlider.value = time;
+        timeSlider.value = leftTime;
     }
 }
