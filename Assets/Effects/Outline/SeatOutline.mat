@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SewersElevator_Outline_MAT 1
+  m_Name: SeatOutline
   m_Shader: {fileID: -6465566751694194690, guid: af64bdc0891432f4bbc7d76d46c1e7ff,
     type: 3}
   m_ValidKeywords: []
@@ -22,7 +22,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_AA628F21:
-        m_Texture: {fileID: 2800000, guid: 116c6ede159b02a43ab0652406b820f4, type: 3}
+        m_Texture: {fileID: 2800000, guid: b2f5c7e7aff822847a2165765ff6cbb0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AlphaTex:

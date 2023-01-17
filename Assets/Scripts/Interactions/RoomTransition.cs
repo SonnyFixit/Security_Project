@@ -18,45 +18,29 @@ public class RoomTransition : MonoBehaviour
 
     public GameObject fadePanel;
 
-    
+
     public GameObject activateCamera1;
     public GameObject deactivateCamera1;
-    
-  
-  
 
     public virtual void OnMouseDown()
     {
-
-
-
         if (DoorPanels.firstButton == true && DoorPanels2.secondButton == true)
         {
-
             audioSource.clip = grantedAccessClip;
             audioSource.Play();
 
-
-
             SwitchCameras();
-
             StartCoroutine("RoomChange");
+            return;
         }
 
-        else
-        {
-            audioSource.clip = deniedAccessClip;
-            audioSource.Play();
-        }
-
-
-
-        
-
+        GetComponent<DialogueTrigger>().TriggerDialogue();
+        audioSource.clip = deniedAccessClip;
+        audioSource.Play();
+        return;
     }
 
 
-  
 
 
     public void DeactivateSection()
@@ -67,17 +51,17 @@ public class RoomTransition : MonoBehaviour
     void SwitchCameras()
     {
         activateCamera1.SetActive(true);
-        
+
 
         deactivateCamera1.SetActive(false);
-        
+
     }
 
     IEnumerator RoomChange()
     {
-        
+
         fadePanel.SetActive(false);
-        
+
 
         fadePanel.SetActive(true);
 

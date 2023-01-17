@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1744687807890228724
+--- !u!1 &1542264173387180840
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,93 +8,82 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2095121752046568927}
-  - component: {fileID: 2626118221879805636}
-  - component: {fileID: 8745801454209264706}
-  - component: {fileID: 3583769325675097265}
+  - component: {fileID: 8552254287051007566}
+  - component: {fileID: 8394704898140707500}
   m_Layer: 0
-  m_Name: PINPAD
+  m_Name: Keypad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2095121752046568927
+--- !u!4 &8552254287051007566
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744687807890228724}
+  m_GameObject: {fileID: 1542264173387180840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -451.339, y: -1.969, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -451.38498, y: -1.7270002, z: 0}
+  m_LocalScale: {x: 0.6977837, y: 0.70826226, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 589201282677848568}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &2626118221879805636
-BoxCollider2D:
+--- !u!212 &8394704898140707500
+SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744687807890228724}
+  m_GameObject: {fileID: 1542264173387180840}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.039398193, y: 0.27402788}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6828613, y: 0.83821476}
-  m_EdgeRadius: 0
---- !u!114 &8745801454209264706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744687807890228724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4380abedb529c9d40a143efa8265c95f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineColor: {r: 0, g: 0, b: 0, a: 0}
-  outlineMaterial: {fileID: 0}
-  normalMaterial: {fileID: 0}
---- !u!114 &3583769325675097265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744687807890228724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 688b9505b86edd64cad5aeb9ce7688bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  question:
-    question: Co ma cztery nogi ale nie chodzi?
-    answers:
-    - "\u017Byrafa"
-    - "St\xF3\u0142"
-    - Pies
-    - "Z\xF3\u0142w"
-    pickedAnswer: 
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 116c6ede159b02a43ab0652406b820f4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.16, y: 1.32}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &2311975610589707750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2500,7 +2489,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7258441772277665257}
-  - {fileID: 2095121752046568927}
+  - {fileID: 8552254287051007566}
   m_Father: {fileID: 2311975612446334864}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2514,8 +2503,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7258441772277665257}
   - component: {fileID: 15412081025545483}
-  - component: {fileID: 7776588848681429388}
-  - component: {fileID: 5601157138503400978}
+  - component: {fileID: 8515739785984778894}
+  - component: {fileID: 3072545019473217919}
   m_Layer: 0
   m_Name: DOOR
   m_TagString: Untagged
@@ -2564,7 +2553,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.4440596, y: 5.0056953}
   m_EdgeRadius: 0
---- !u!114 &7776588848681429388
+--- !u!114 &8515739785984778894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2579,9 +2568,9 @@ MonoBehaviour:
   dialogue:
     speakerName: Ja
     sentences:
-    - "Te drzwi chyba s\u0105 zamkni\u0119t\u0119 na klucz."
-    - "Powinienenm si\u0119 rozejrze\u0107 po okolicy..."
---- !u!114 &5601157138503400978
+    - "Zamkni\u0119te"
+    - "T\u0119dy na pewno nie wejd\u0119"
+--- !u!114 &3072545019473217919
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2593,9 +2582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9babcc0d5d213a40bce751a307e8965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineColor: {r: 0, g: 0, b: 0, a: 0}
   outlineMaterial: {fileID: 0}
-  normalMaterial: {fileID: 0}
 --- !u!1001 &3250998302571457463
 PrefabInstance:
   m_ObjectHideFlags: 0

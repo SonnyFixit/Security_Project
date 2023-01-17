@@ -140,6 +140,7 @@ public class MinigameHackManager : MonoBehaviour
         if (isPlaying)
             return;
 
+        GameManager.cameraCanMove = false;
         isPlaying = true;
         mainText.text = "W³am sie do systemu";
         minigameCanvas.gameObject.SetActive(true);
@@ -272,8 +273,20 @@ public class MinigameHackManager : MonoBehaviour
                     }
                     else
                     {
-                        playerTargetCopy.GetComponent<Image>().color = wrongColor;
                         targetIterator = 0;
+                        if (pickedHack == data.targets[targetIterator])
+                        {
+                            targetIterator++;
+                            playerTargetCopy.GetComponent<Image>().color = goodColor;
+                        }
+                        else
+                        {
+                            playerTargetCopy.GetComponent<Image>().color = wrongColor;
+                        }
+                        for (int h = 0; h < currentClick; h++)
+                        {
+                            playerHacks[h].GetComponent<Image>().color = wrongColor;
+                        }
                     }
                     currentClick++;
 
@@ -304,7 +317,6 @@ public class MinigameHackManager : MonoBehaviour
 
     public void EndGame(bool win)
     {
-        Debug.Log("Result: " + win);
         PlayerWin = win;
         isPlaying = false;
         MainGatesButtonTwo.firstGateUnlock = win;
@@ -352,6 +364,7 @@ public class MinigameHackManager : MonoBehaviour
                 DestroyImmediate(hackButtons[i, j]);
             }
         }
+        GameManager.cameraCanMove = true;
     }
 
     private void Update()

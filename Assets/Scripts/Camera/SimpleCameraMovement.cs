@@ -40,28 +40,34 @@ public class SimpleCameraMovement : MonoBehaviour
 
     public float manualSpeed = 5.0f;
 
+    public static bool canMove = true;
+
 
 
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameIsPaused || !GameManager.cameraCanMove)
+            return;
+
+
         ZoomCamera();
     }
 
     void LateUpdate()
     {
+        if (GameManager.gameIsPaused || !GameManager.cameraCanMove)
+            return;
         MoveWithMouse();
     }
 
 
     private void MoveWithMouse()
     {
-
-
         if (Input.GetMouseButtonDown(1))
         {
             dragOrigin = camera.ScreenToWorldPoint(Input.mousePosition);
-           
+
 
         }
 
@@ -89,7 +95,6 @@ public class SimpleCameraMovement : MonoBehaviour
 
     private void ZoomCamera()
     {
-
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
 

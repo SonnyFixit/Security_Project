@@ -12,22 +12,34 @@ public class DoorPanels2 : MonoBehaviour
 
     public static bool secondButton = false;
 
+    private QuestionTrigger questionTrigger;
+
+    private void Start()
+    {
+        questionTrigger = GetComponent<QuestionTrigger>();
+    }
 
 
     public virtual void OnMouseDown()
     {
-
         if (secondButton == false)
         {
             audioSource.Play();
         }
-
-
-        doorLight.SetActive(true);
-        secondButton = true;
-
     }
 
+    private void Update()
+    {
+        if (secondButton)
+            return;
 
+        if (questionTrigger.question.answererdCorrectly)
+        {
+            secondButton = true;
+            doorLight.SetActive(true);
+            GetComponent<QuestionObject>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+        }
+    }
 
 }

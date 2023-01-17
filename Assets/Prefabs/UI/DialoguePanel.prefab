@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 4.4533}
-  m_SizeDelta: {x: 0, y: 92.907}
+  m_AnchoredPosition: {x: 0, y: 14.966}
+  m_SizeDelta: {x: 0, y: 168.19}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4603611604500703090
 CanvasRenderer:
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -170,7 +170,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 70.45314}
+  m_AnchoredPosition: {x: 0, y: 118.61}
   m_SizeDelta: {x: 0, y: 39.0927}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4603611605396312870
@@ -228,8 +228,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 4603611605994720957}
   - component: {fileID: 4603611605994720955}
   - component: {fileID: 4603611605994720954}
+  - component: {fileID: 4409430788239228127}
   m_Layer: 5
   m_Name: DialoguePanel
   m_TagString: Untagged
@@ -308,8 +309,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -0.5, y: 144.49252}
-  m_SizeDelta: {x: 600, y: 180}
+  m_AnchoredPosition: {x: 0, y: 185}
+  m_SizeDelta: {x: 920, y: 280}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4603611605994720955
 CanvasRenderer:
@@ -349,6 +350,26 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!95 &4409430788239228127
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4603611605994720956}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 11bf44c392e434248bb02366eedb71dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4603611605997776713
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,8 +463,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -521,8 +542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7025935, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -0.00048828125, y: 24}
-  m_SizeDelta: {x: -0.00094604, y: 48}
+  m_AnchoredPosition: {x: 32.417725, y: 34.514023}
+  m_SizeDelta: {x: -64.8374, y: 69.028}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4603611606455338654
 CanvasRenderer:

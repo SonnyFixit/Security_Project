@@ -40,26 +40,22 @@ public class SewersCameraScript : MonoBehaviour
 
     public float manualSpeed = 5.0f;
 
-
-
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.gameIsPaused || !GameManager.cameraCanMove)
+            return;
+
         ZoomCamera();
 
-        if (FuseBox.fuseBoxDestroyed == false)
-        {
-            rightBound = 103.5f;
-        }
-
-        else if (FuseBox.fuseBoxDestroyed == true)
-        {
-            rightBound = 192.4f;
-        }
+        rightBound = FuseBox.fuseBoxDestroyed ? 192.4f : 103.5f;
     }
 
     void LateUpdate()
     {
+        if (GameManager.gameIsPaused || !GameManager.cameraCanMove)
+            return;
+
         MoveWithMouse();
     }
 

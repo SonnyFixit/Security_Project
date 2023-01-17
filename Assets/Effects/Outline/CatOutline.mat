@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cat_Outline_MAT
+  m_Name: CatOutline
   m_Shader: {fileID: -6465566751694194690, guid: af64bdc0891432f4bbc7d76d46c1e7ff,
     type: 3}
   m_ValidKeywords: []
@@ -58,7 +58,7 @@ Material:
     - Vector1_72DD12EB: 0.9999
     - _EnableExternalAlpha: 0
     m_Colors:
-    - Color_1C3B94A: {r: 0, g: 0, b: 0, a: 0}
+    - Color_1C3B94A: {r: 6.3225985, g: 5.746155, b: 0.44735357, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

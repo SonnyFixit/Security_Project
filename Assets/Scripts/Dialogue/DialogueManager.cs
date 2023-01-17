@@ -14,10 +14,15 @@ public class DialogueManager : MonoBehaviour
     public TMP_Text dialogueButtonText;
     public GameObject dialoguePanel;
 
-    private string continueText = "CONTINUE »";
-    private string quitText = "EXIT";
+    private string continueText = "DALEJ »";
+    private string quitText = "ZAKOÑCZ";
+
+    private bool isStartDialogue = false;
+    public static bool startDialogueEnded = false;
+    private bool openPanel = false;
 
     private Queue<string> sentences;
+    [SerializeField]
     private Animator dialogueAnimator;
 
     [Header("Question panel settings")]
@@ -27,9 +32,8 @@ public class DialogueManager : MonoBehaviour
 
     private GameObject[] answerButtons;
     public Transform answersContainer;
+    [SerializeField]
     private Animator questionAnimator;
-
-    private string answerwContainerName = "AnswersContainerl";
 
     private enum DialogType
     {
@@ -37,18 +41,7 @@ public class DialogueManager : MonoBehaviour
         Text,
         Question
     }
-    private DialogType dialogType = DialogType.None;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        sentences = new Queue<string>();
-        dialogueAnimator = dialoguePanel.GetComponent<Animator>();
-        questionAnimator = questionPanel.GetComponent<Animator>();
-
-        answerButtons = Array.Empty<GameObject>();
-        //answersContainer = questionPanel.transform.Find(answerwContainerName);
-    }
+    private DialogType dialogueType = DialogType.None;
 
     private void Update()
     {
@@ -57,7 +50,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        switch (dialogType)
+        switch (dialogueType)
         {
             case DialogType.None:
                 break;
@@ -94,13 +87,27 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartDialogue(Dialogue dialogue)
     {
+        if (openPanel || dialogue == null)
+            return;
+
+        openPanel = true;
+        ShowPanelImage(dialoguePanel.GetComponent<Image>());
         dialoguePanel.SetActive(true);
+        GameManager.cameraCanMove = false;
         dialogueAnimator.SetBool("IsOpen", true);
 
-        dialogType = DialogType.Text;
-        speakerNameText.text = dialogue.speakerName;
+        dialogueType = DialogType.Text;
+        if (dialogue.speakerName == "Narrator" && !isStartDialogue)
+        {
+            isStartDialogue = true;
+        }
+        else
+        {
+            isStartDialogue = false;
+            speakerNameText.text = dialogue.speakerName;
+        }
 
-        sentences.Clear();
+        sentences = new Queue<string>();
         Array.ForEach(dialogue.sentences, s => sentences.Enqueue(s));
         DisplayNextSentence();
     }
@@ -122,38 +129,56 @@ public class DialogueManager : MonoBehaviour
     }
     private void EndDialogue()
     {
+        openPanel = false;
         dialogueAnimator.SetBool("IsOpen", false);
-        //dialoguePanel.SetActive(false);
+        GameManager.cameraCanMove = true;
+
+        if (isStartDialogue)
+            FindObjectOfType<GameManager>().StartDialogueEnded = true;
+
+        StartCoroutine(HidePanelImage(dialoguePanel.GetComponent<Image>()));
     }
 
-    public void StartQuestion(Question dialogue)
+    public void StartQuestion(Question question)
     {
+        if (openPanel)
+            return;
+
+        openPanel = true;
+        ShowPanelImage(questionPanel.GetComponent<Image>());
         questionPanel.SetActive(true);
         questionAnimator.SetBool("IsOpen", true);
+        GameManager.cameraCanMove = false;
 
-        questionText.text = dialogue.question;
-        dialogType = DialogType.Question;
+        questionText.text = question.question;
+        dialogueType = DialogType.Question;
 
-        if (dialogue.answers.Length > 4)
+        if (question.answers.Length > 4)
         {
             Debug.LogWarning("Many dialogue options. Consider reduce number of available options!");
         }
 
-        foreach (var oldButton in answerButtons)
+        if (answerButtons == null)
         {
-            DestroyImmediate(oldButton);
+            answerButtons = new GameObject[question.answers.Length];
+        }
+        else
+        {
+            foreach (var oldButton in answerButtons)
+            {
+                DestroyImmediate(oldButton);
+            }
         }
 
-        answerButtons = new GameObject[dialogue.answers.Length];
-        for (int i = 0; i < dialogue.answers.Length; i++)
+        answerButtons = new GameObject[question.answers.Length];
+        for (int i = 0; i < question.answers.Length; i++)
         {
-            string currentAnswer = dialogue.answers[i];
+            string currentAnswer = question.answers[i];
             answerButtons[i] = Instantiate(answerButtonPrefab, answersContainer, false);
             answerButtons[i].GetComponentInChildren<TMP_Text>().text = $"{i + 1}. " + currentAnswer;
             answerButtons[i].GetComponentInChildren<Button>().onClick.AddListener(() =>
                 {
-                    dialogue.pickedAnswer = currentAnswer;
-                    Debug.Log("You clicked: " + currentAnswer);
+                    question.ValidateAnswer(currentAnswer);
                     EndQuestion();
                 });
         }
@@ -183,7 +208,26 @@ public class DialogueManager : MonoBehaviour
         {
             DestroyImmediate(oldButton);
         }
-        //questionPanel.SetActive(false);
+        GameManager.cameraCanMove = true;
+        openPanel = false;
+        StartCoroutine(HidePanelImage(questionPanel.GetComponent<Image>()));
+    }
+
+
+    private IEnumerator HidePanelImage(Image image)
+    {
+        yield return new WaitForSeconds(0.5f);
+
+        var tempColor = image.color;
+        tempColor.a = 0f;
+        image.color = tempColor;
+    }
+
+    private void ShowPanelImage(Image image)
+    {
+        var tempColor = image.color;
+        tempColor.a = 1f;
+        image.color = tempColor;
     }
 
     private IEnumerator TypeSentence(string sentence)

@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider2D))]
 public class InteractableObject : MonoBehaviour
 {
-    public Color outlineColor;
-
     [SerializeField]
     private Material outlineMaterial;
 
-    [SerializeField]
     private Material normalMaterial;
 
     private Material currentMaterial;
+    private Renderer materialRenderer;
+
+    private void Start()
+    {
+        materialRenderer = GetComponent<Renderer>();
+        if (materialRenderer != null)
+            normalMaterial = materialRenderer.material;
+    }
 
 
     public virtual void OnMouseDown()
@@ -21,12 +27,13 @@ public class InteractableObject : MonoBehaviour
 
     public void OnMouseEnter()
     {
-        currentMaterial = GetComponent<Renderer>().material = outlineMaterial;
-
+        if (outlineMaterial != null)
+            currentMaterial = GetComponent<Renderer>().material = outlineMaterial;
     }
 
     public void OnMouseExit()
     {
-        currentMaterial = GetComponent<Renderer>().material = normalMaterial;
+        if (normalMaterial != null)
+            currentMaterial = GetComponent<Renderer>().material = normalMaterial;
     }
 }

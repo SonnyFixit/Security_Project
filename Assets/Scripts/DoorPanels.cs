@@ -9,25 +9,34 @@ public class DoorPanels : MonoBehaviour
 
     [SerializeField]
     private AudioSource audioSource;
-   
-    public static bool firstButton = false;
 
+    public static bool firstButton = false;
+    private QuestionTrigger questionTrigger;
+
+    private void Start()
+    {
+        questionTrigger = GetComponent<QuestionTrigger>();
+    }
 
 
     public virtual void OnMouseDown()
     {
-
         if (firstButton == false)
         {
             audioSource.Play();
         }
-
-
-        doorLight.SetActive(true);
-        firstButton = true;
-
     }
+    private void Update()
+    {
+        if (firstButton)
+            return;
 
-   
-
+        if (questionTrigger.question.answererdCorrectly)
+        {
+            firstButton = true;
+            doorLight.SetActive(true);
+            GetComponent<QuestionObject>().enabled = false;
+            GetComponent<Collider2D>().enabled = false;
+        }
+    }
 }
