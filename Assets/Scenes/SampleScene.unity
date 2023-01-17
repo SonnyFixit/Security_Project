@@ -1472,8 +1472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae99bacb44bfc1e4bbeea14b7e4c786c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraCanMoveText: {fileID: 729361072}
-  dialoguePanel: {fileID: 1330310320}
   menuCanvas: {fileID: 429425822}
   blackCanvasAnimator: {fileID: 420546621}
 --- !u!4 &479664702
@@ -4541,12 +4539,6 @@ Transform:
   m_Father: {fileID: 140778298}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1330310320 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1402152530673633892, guid: 13a4c5bf096f6aa4bb715358c8c55022,
-    type: 3}
-  m_PrefabInstance: {fileID: 531628476}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1330310324 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1272077649852938247, guid: 13a4c5bf096f6aa4bb715358c8c55022,

@@ -97,7 +97,7 @@ public class DialogueManager : MonoBehaviour
         dialogueAnimator.SetBool("IsOpen", true);
 
         dialogueType = DialogType.Text;
-        if (dialogue.speakerName == "Narrator" && !isStartDialogue)
+        if ((dialogue.speakerName == "Narrator" || dialogue.speakerName == "Speaker name" || dialogue.speakerName == "") && !isStartDialogue)
         {
             isStartDialogue = true;
         }
